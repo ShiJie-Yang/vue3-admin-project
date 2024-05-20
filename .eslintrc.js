@@ -29,6 +29,7 @@ module.exports = {
     'curly': ['error', 'all'], // 要求遵循大括号约定
     'camelcase': ['error', {properties: 'always'}], // 强制使用驼峰命名法
     'brace-style': ['error', '1tbs', { allowSingleLine: true }], // 强制在代码块中使用一致的大括号风格
-    'array-bracket-spacing': ['error', 'never'] // 在数组括号内强制实现一致的间距
+    'array-bracket-spacing': ['error', 'never'], // 在数组括号内强制实现一致的间距
+    'vue/multi-word-component-names': 'off'
   }
 }
