@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-
+// import { mockLogin } from '@/mock/login';
 
 // info    GET   /admin/acl/index/info
 // login   POST  /admin/acl/index/login
@@ -7,7 +7,7 @@ import request from '@/utils/request';
 
 export interface LoginModel {
   userName: string,
-  password: string
+  passWord: string
 }
 
 export interface TokenModel {
@@ -25,11 +25,12 @@ export interface UserInfoModel {
 export default {
   // 登录 - 获取token
   reqLogin(data: LoginModel) {
-    return request.post<any, TokenModel>(``, data)
+    return request.post<any, TokenModel>(`/api/login`, data)
+    // return mockLogin(data)
   },
   // 获取个人信息
   reqInfo() {
-    return request.get<any, UserInfoModel>(``)
+    return request.get<any, UserInfoModel>(`/api/userInfo`)
   },
   // 退出登录
   reqLogout() {

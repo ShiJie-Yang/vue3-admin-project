@@ -4,7 +4,7 @@ import { staticRoutes, allAsyncRoutes, anyRoute } from '@/router/routes'
 import router from '@/router';
 import type { UserInfoState } from './interface/userInfo'
 import { getToken, removeToken, setToken } from '@/utils/token';
-import userinfoApi from '@/api/user';
+import userinfoApi, { LoginModel } from '@/api/user';
 import { ElMessage, MessageParamsWithType } from 'element-plus'
 import { cloneDeep } from 'lodash';
 
@@ -50,9 +50,10 @@ export const userInfoStore = defineStore('userInfo', {
     menuRoutes: []
   }),
   actions: {
-    async login (userName: string, password: string) {
+    async login (data: LoginModel) {
       try {
-        this.token = await userinfoApi.reqLogin({ userName, password })
+        const res = await userinfoApi.reqLogin(data)
+        this.token = res.token
         setToken(this.token)
       } catch (error) {
         ElMessage.error(error as MessageParamsWithType)

@@ -24,10 +24,13 @@ export const staticRoutes: Array<RouteRecordRaw> = [
     meta: {
       hidden: true
     }
-  },
+  }
+];
+
+export const allAsyncRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    component: () => import('@/layout/index.vue'),
+    component: () => import('@/views/layout/index.vue'),
     redirect: '/home',
     children: [
       {
@@ -41,9 +44,7 @@ export const staticRoutes: Array<RouteRecordRaw> = [
       }
     ]
   }
-];
-
-export const allAsyncRoutes: Array<RouteRecordRaw> = []
+]
 
 export const anyRoute: RouteRecordRaw = {
   path: '/:pathMatch(.*)', 
