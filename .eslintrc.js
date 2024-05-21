@@ -7,7 +7,7 @@ module.exports = {
     browser: true // 启用浏览器全局变量
   },
   parserOptions: {
-    parser: 'babel-eslint', // 使用babel-eslint作为解析器
+    parser: '@typescript-eslint/parser', // 使用babel-eslint作为解析器
     ecmaVersion: 2020, // 启用ES2020语法支持
     sourceType: 'module' // 模块化导入导出语法
   },
@@ -17,6 +17,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended'
   ],
   plugins: ['@typescript-eslint'],
+  parser: 'vue-eslint-parser',
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 在生产环境中禁止使用console，其他环境中允许使用
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 在生产环境中禁止使用debugger，其他环境中允许使用
@@ -37,9 +38,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-function": "off",
     'typescript-eslint/no-var-requires': 'off',
-    "extends": ["plugin:vue/vue3-recommended"],
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser"
-    }
+    "@typescript-eslint/no-var-requires": "off"
   }
 }

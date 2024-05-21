@@ -1,36 +1,68 @@
 <template>
   <div class="login-form">
     <div class="login wrap">
-      <div class="h1">Login</div>
+      <div class="h1">
+        Login
+      </div>
       <el-form :model="formData">
         <el-form-item>
-          <el-input class="input" v-model="formData.userName" placeholder="UserName" id="email" name="email" type="text" />
-          <el-input class="input" v-model="formData.passWord" placeholder="Password" id="password" name="password" :type="inputType" @input="handleChange"/>
+          <el-input
+            id="email"
+            v-model="formData.userName"
+            class="input"
+            placeholder="UserName"
+            name="email"
+            type="text"
+          />
+          <el-input
+            id="password"
+            v-model="formData.passWord"
+            class="input"
+            placeholder="Password"
+            name="password"
+            :type="inputType"
+            @input="handleChange"
+          />
         </el-form-item>
       </el-form>
-      <el-button value="Login" class="btn" type="submit" @click="handleClick">Login</el-button>
-      <View class="icon" v-show="showIcon === 'show'" @click="handleShowIcon"/>
-      <Hide class="icon" v-show="showIcon === 'hide'" @click="handleShowIcon" />
+      <el-button
+        value="Login"
+        class="btn"
+        type="submit"
+        @click="handleClick"
+      >
+        Login
+      </el-button>
+      <View
+        v-show="showIcon === 'show'"
+        class="icon"
+        @click="handleShowIcon"
+      />
+      <Hide
+        v-show="showIcon === 'hide'"
+        class="icon"
+        @click="handleShowIcon"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, MessageParamsWithType } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { userInfoStore } from '@/store/user'
+import { LoginModel } from '@/api/user';
 const router = useRouter()
 const showIcon = ref<string>('none')
 const inputType = ref<string>('password')
-interface FormData {
-  userName: string,
-  passWord: string
-}
 
-const formData = ref<FormData>({
+const formData = ref<LoginModel>({
   userName: '',
   passWord: ''
 })
+
+const userInfoStoreData = userInfoStore()
 
 const handleChange = () => {
   if (formData.value.passWord) {
@@ -50,13 +82,21 @@ const handleShowIcon = () => {
   }
 }
 
-const handleClick = () => {
+const handleClick = async () => {
+  const {login, getUserInfo } = userInfoStoreData
   if (formData.value.userName === '') {
     ElMessage.warning('请输入用户名')
   } else if (formData.value.passWord === '') {
     ElMessage.warning('请输入密码')
   } else {
-    router.push({ path: '/home' });
+    try {
+      Promise.all([
+        await login(formData.value), 
+        await getUserInfo()])
+      router.push({ path: '/' })
+    } catch (error) {
+      ElMessage.error(error as MessageParamsWithType)
+    }
   }
 }
 </script>
