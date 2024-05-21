@@ -59,8 +59,6 @@ const handleClick = () => {
     router.push({ path: '/home' });
   }
 }
-
-
 </script>
 
 <style lang="scss" scope>
