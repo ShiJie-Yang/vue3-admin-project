@@ -36,6 +36,7 @@ const removeRouters = () => {
 }
 
 const initUserInfo = () => ({
+  id: '',
   name: '',
   avatar: '',
   buttons: [],

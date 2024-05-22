@@ -24,7 +24,7 @@ request.interceptors.request.use((config: ExtendedAxiosRequestConfig) => {
   const userInfo = userInfoStore()
   const token = userInfo.token
   if (token) {
-    (config.headers as AxiosRequestHeaders).token = token
+    config.headers['Authorization'] = 'Bearer ' + token 
   }
   return config
 }
