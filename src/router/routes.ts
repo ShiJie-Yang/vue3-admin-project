@@ -24,10 +24,7 @@ export const staticRoutes: Array<RouteRecordRaw> = [
     meta: {
       hidden: true
     }
-  }
-];
-
-export const allAsyncRoutes: Array<RouteRecordRaw> = [
+  },
   {
     path: '/',
     component: () => import('@/views/layout/index.vue'),
@@ -44,7 +41,9 @@ export const allAsyncRoutes: Array<RouteRecordRaw> = [
       }
     ]
   }
-]
+];
+
+export const allAsyncRoutes: Array<RouteRecordRaw> = []
 
 export const anyRoute: RouteRecordRaw = {
   path: '/:pathMatch(.*)', 

@@ -15,6 +15,7 @@ export interface TokenModel {
 }
 
 export interface UserInfoModel {
+  id: string
   name: string
   avatar: string
   buttons: string[]
@@ -26,7 +27,6 @@ export default {
   // 登录 - 获取token
   reqLogin(data: LoginModel) {
     return request.post<any, TokenModel>(`/api/login`, data)
-    // return mockLogin(data)
   },
   // 获取个人信息
   reqInfo() {
